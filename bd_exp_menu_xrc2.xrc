@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<resource>
+  <object class="wxMenuBar" name="bd_exp_menu">
+    <object class="wxMenu" name="file_menu">
+      <label>File</label>
+      <object class="wxMenuItem" name="load_xml_menu">
+        <label>Load XML file</label>
+        <accel>ctrl+l</accel>
+      </object>
+      <object class="wxMenuItem" name="save_xml_menu">
+        <label>Save XML file</label>
+        <accel>ctrl+s</accel>
+      </object>
+      <object class="wxMenuItem" name="save_data_menu">
+        <label>Save Test Data</label>
+        <accel>ctrl+shift+s</accel>
+      </object>
+      <object class="wxMenuItem" name="quit_menu">
+        <label>Quit</label>
+        <accel>ctrl+q</accel>
+      </object>
+    </object>
+    <object class="wxMenu" name="diagram_menu">
+      <label>Diagram</label>
+      <object class="wxMenuItem" name="update_diagram_menu">
+        <label>Update Diagram</label>
+        <accel>ctrl+d</accel>
+      </object>
+      <object class="wxMenuItem" name="force_update_diagram_menu">
+        <label>Force Diagram Update</label>
+        <accel>ctrl+shift+f</accel>
+      </object>
+    </object>
+    <object class="wxMenu" name="run_menu">
+      <label>Run</label>
+      <object class="wxMenuItem" name="run_sys_check_menu">
+        <label>Run System Check</label>
+        <accel>ctrl+c</accel>
+      </object>
+      <object class="wxMenuItem" name="run_test_menu">
+        <label>Run Test</label>
+        <accel>ctrl+r</accel>
+      </object>
+      <object class="wxMenuItem" name="return_to_zero_menu">
+        <label>Return to Zero</label>
+        <accel>ctrl+0</accel>
+      </object>
+      <object class="wxMenuItem" name="reset_theta_menu">
+        <label>Reset Theta</label>
+        <accel>ctrl+w</accel>
+      </object>
+    </object>
+  </object>
+</resource>
