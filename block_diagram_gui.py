@@ -97,8 +97,9 @@ import wx_utils
 import xml_utils
 import copy
 
-import PyPDF2
-from wx.lib.pdfviewer import pdfViewer, pdfButtonPanel
+if use_pdfviewer:
+    import PyPDF2
+    from wx.lib.pdfviewer import pdfViewer, pdfButtonPanel
 
 xml_wildcard = "XML files (*.xml)|*.xml"
 tex_wildcard = "TEX files (*.tex)|*.tex"
