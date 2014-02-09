@@ -1399,7 +1399,8 @@ class MyApp(wx.App):
             xrcfile = 'block_diagram_gui_xrc.xrc'
         else:
             xrcfile = 'block_diagram_gui_xrc_bitmap_backup.xrc'
-            
+
+        assert os.path.exists(xrcfile), "Could not find xrc file: " + xrcfile
         print('loading', xrcfile)
 
         self.res = xrc.XmlResource(xrcfile)

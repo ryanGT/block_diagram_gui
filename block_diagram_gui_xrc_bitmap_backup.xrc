@@ -1,0 +1,190 @@
+<?xml version="1.0" ?>
+<resource class="wxButton">
+  <object class="wxFrame" name="MainFrame">
+    <object class="wxMenuBar" name="main_menu">
+      <object class="wxMenu" name="file_menu">
+        <label>&amp;File</label>
+        <object class="wxMenuItem" name="load_menu">
+          <label>Load XML file</label>
+          <accel>ctrl+l</accel>
+        </object>
+        <object class="wxMenuItem" name="save_menu">
+          <label>Save to XML</label>
+          <accel>ctrl+s</accel>
+        </object>
+        <object class="wxMenuItem" name="save_tikz_menu">
+          <label>Save Diagram to TiKZ (latex)</label>
+          <accel>ctrl+shift+s</accel>
+        </object>
+        <object class="wxMenuItem" name="exit_menu">
+          <label>&amp;Quit</label>
+          <accel>ctrl+q</accel>
+        </object>
+      </object>
+      <object class="wxMenu" name="diagram_menu">
+        <label>Diagram</label>
+        <object class="wxMenuItem" name="update_diagram_menu">
+          <label>Update Diagram</label>
+          <accel>ctrl+d</accel>
+        </object>
+        <object class="wxMenuItem" name="force_width_scaling_menu">
+          <label>Force Width-Based Diagram Scaling</label>
+          <accel>ctrl+w</accel>
+        </object>
+        <object class="wxMenuItem" name="force_height_scaling_menu">
+          <label>Force Height-Based Diagram Scaling</label>
+          <accel>ctrl+h</accel>
+        </object>
+      </object>
+      <object class="wxMenu" name="grid_menu">
+        <label>Grid</label>
+        <object class="wxMenuItem" name="grid_autosize_menu">
+          <label>Auto-Size Grid</label>
+          <accel>ctrl+g</accel>
+        </object>
+      </object>
+    </object>
+    <object class="wxPanel" name="MainPanel">
+      <object class="wxBoxSizer">
+        <orient>wxVERTICAL</orient>
+        <object class="sizeritem">
+          <object class="wxStaticText">
+            <label>Ryan's first attempt at XRCed</label>
+            <style>wxALIGN_CENTRE</style>
+          </object>
+          <option>0</option>
+          <flag>wxALL|wxEXPAND</flag>
+          <border>5</border>
+        </object>
+        <object class="sizeritem">
+          <object class="wxPanel" name="plot_container_panel">
+            <object class="wxFlexGridSizer">
+              <object class="sizeritem">
+                <object class="wxStaticBitmap" name="static_bitmap"/>
+                <option>1</option>
+                <flag>wxEXPAND</flag>
+              </object>
+              <cols>1</cols>
+              <rows>1</rows>
+              <growablecols>0</growablecols>
+              <growablerows>0</growablerows>
+            </object>
+          </object>
+          <option>1</option>
+          <flag>wxEXPAND</flag>
+        </object>
+        <object class="sizeritem">
+          <object class="wxBoxSizer">
+            <object class="sizeritem">
+              <object class="wxChoice" name="new_block_choice"/>
+              <flag>wxRIGHT</flag>
+              <border>5</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxStaticText">
+                <label>element name:</label>
+              </object>
+              <flag>wxALIGN_RIGHT</flag>
+            </object>
+            <object class="sizeritem">
+              <object class="wxTextCtrl" name="block_name_ctrl">
+                <value>abcdefghijklmnopqrstuvwxyz</value>
+                <style>wxTE_PROCESS_ENTER</style>
+              </object>
+              <option>1</option>
+              <flag>wxEXPAND|wxALIGN_LEFT</flag>
+            </object>
+            <object class="sizeritem">
+              <object class="wxButton" name="add_block_button">
+                <label>Add Block</label>
+              </object>
+              <border>5</border>
+            </object>
+            <orient>wxHORIZONTAL</orient>
+          </object>
+          <flag>wxALL</flag>
+          <border>5</border>
+        </object>
+        <object class="sizeritem">
+          <object class="wxFlexGridSizer">
+            <object class="sizeritem">
+              <object class="wxGrid" name="params_grid">
+                <size>500,200</size>
+              </object>
+              <option>1</option>
+              <flag>wxEXPAND</flag>
+            </object>
+            <object class="sizeritem">
+              <object class="wxStaticLine">
+                <style>wxLI_VERTICAL</style>
+              </object>
+            </object>
+            <object class="sizeritem">
+              <object class="wxBoxSizer">
+                <object class="sizeritem">
+                  <object class="wxStaticText">
+                    <label>Element List</label>
+                  </object>
+                  <flag>wxTOP</flag>
+                  <border>5</border>
+                </object>
+                <object class="sizeritem">
+                  <object class="wxListBox" name="block_list_box">
+                    <size>200,200</size>
+                  </object>
+                  <option>1</option>
+                  <flag>wxBOTTOM|wxEXPAND</flag>
+                  <border>5</border>
+                  <minsize>200,200</minsize>
+                </object>
+                <object class="sizeritem">
+                  <object class="wxBoxSizer">
+                    <orient>wxHORIZONTAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxButton" name="delete_block_button">
+                        <label>Delete Block</label>
+                      </object>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxButton" name="replace_block_button">
+                        <label>Replace Block</label>
+                      </object>
+                    </object>
+                  </object>
+                </object>
+                <orient>wxVERTICAL</orient>
+              </object>
+              <option>1</option>
+              <flag>wxEXPAND</flag>
+            </object>
+            <cols>3</cols>
+            <rows>1</rows>
+            <growablecols>0</growablecols>
+            <growablerows>0</growablerows>
+          </object>
+        </object>
+        <object class="sizeritem">
+          <object class="wxBoxSizer">
+            <orient>wxHORIZONTAL</orient>
+            <object class="sizeritem">
+              <object class="wxButton" name="load_button">
+                <label>load</label>
+              </object>
+              <flag>wxALL</flag>
+              <border>5</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxButton" name="save_button">
+                <label>save</label>
+              </object>
+              <flag>wxALL|wxALIGN_RIGHT</flag>
+              <border>5</border>
+            </object>
+          </object>
+        </object>
+      </object>
+    </object>
+    <pos>100,50</pos>
+    <title>Block Diagram GUI</title>
+  </object>
+</resource>
