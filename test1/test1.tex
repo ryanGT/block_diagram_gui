@@ -1,0 +1,60 @@
+\documentclass[landscape,letterpaper,11pt]{article}
+\usepackage[utf8x]{inputenc} % utf8 encoding
+\usepackage[T1]{fontenc} % use T1 fonts
+\usepackage{amsmath} % nice math symbols
+\usepackage{bm} % bold math
+\usepackage{color} % change text color        
+
+\usepackage{tikz}
+\usetikzlibrary{calc,patterns,decorations.pathmorphing,decorations.markings}
+\tikzstyle{emptynode}=[minimum width=0pt, inner sep=0pt, minimum height=0pt, draw=none]
+%%%<
+\usepackage{verbatim}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{5pt}%
+%%%>
+
+\def \springlength {2.0cm}
+\pgfmathparse{\springlength*3}
+\let\damperlength\pgfmathresult
+\def \groundX {0.0cm}
+\def \groundwidth {4cm}
+\def \masswidth {2.5cm}
+\pgfmathparse{\masswidth/2}
+\let\halfmasswidth\pgfmathresult
+\def \wallwidth {0.35cm}
+\pgfmathparse{\wallwidth/2}
+\let\halfwallwidth\pgfmathresult
+\pgfmathparse{\masswidth+0.7cm}
+\let\wallheight\pgfmathresult
+\def \mylabelshift {0.2cm}
+
+\usetikzlibrary{shapes,arrows}
+\tikzstyle{block} = [draw, fill=blue!10, rectangle, 
+    minimum height=1.0cm, minimum width=1.0cm]
+\tikzstyle{multilineblock} = [draw, fill=blue!10, rectangle, 
+    minimum height=1.25cm, minimum width=1.0cm, 
+    text width=2cm,text centered,midway]
+\tikzstyle{sum} = [draw, fill=blue!20, circle, node distance=1.5cm]
+\tikzstyle{input} = [emptynode]%[coordinate]
+\tikzstyle{output} = [emptynode]
+\tikzstyle{myarrow} = [coordinate, node distance=1.5cm]
+\tikzstyle{pinstyle} = [pin edge={to-,thin,black}]
+\tikzstyle{serialnode} = [inner sep=0.5mm,rectangle,draw=black, fill=black]
+\tikzstyle{serialline} = [draw, ->, ultra thick, densely dashed]
+\tikzstyle{mylabel} = [emptynode, yshift=\mylabelshift]
+
+
+\begin{document}
+\begin{tikzpicture}[every node/.style={font=\large}, node distance=2.5cm,>=latex']
+\node [input] (input) at (0,0) {$u$};
+\node [sum, right of=input, node distance=1cm] (summing_block1) {};
+\path (summing_block1) ++(-55:0.4) node (summing_block1_label0) {\small{$-$}};
+\path (summing_block1) ++(155:0.4) node (summing_block1_label1) {\small{$+$}};
+%output lines/arrows
+
+% wires
+\draw [->] (input) -- (summing_block1);
+\end{tikzpicture}
+\end{document}

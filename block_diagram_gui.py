@@ -157,7 +157,23 @@ sorted_blocks = sorted(block_params.iterkeys())
 
 max_rows = 20#maximum number of rows that should be searched 
 
-tikz_header = r"""\input{drawing_header}
+tikz_header = r"""\documentclass[landscape,letterpaper,11pt]{article}
+\usepackage[utf8x]{inputenc} % utf8 encoding
+\usepackage[T1]{fontenc} % use T1 fonts
+\usepackage{amsmath} % nice math symbols
+\usepackage{bm} % bold math
+\usepackage{color} % change text color        
+
+\usepackage{tikz}
+\usetikzlibrary{calc,patterns,decorations.pathmorphing,decorations.markings}
+\tikzstyle{emptynode}=[minimum width=0pt, inner sep=0pt, minimum height=0pt, draw=none]
+%%%<
+\usepackage{verbatim}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{5pt}%
+%%%>
+
 \def \springlength {2.0cm}
 \pgfmathparse{\springlength*3}
 \let\damperlength\pgfmathresult
@@ -1307,8 +1323,12 @@ class MyApp(wx.App):
             
         if tex_path:
             self.update_latex(tex_path)
-            
-            cmd = 'pdflatex %s' % tex_path
+
+            curdir = os.getcwd()
+            tex_dir, tex_name = os.path.split(tex_path)
+            os.chdir(tex_dir)
+
+            cmd = 'pdflatex %s' % tex_name
             os.system(cmd)
 
             if use_pdfviewer:
@@ -1316,19 +1336,16 @@ class MyApp(wx.App):
                 self.pdfviewer.LoadFile(pdfpath)
 
             else:
-                curdir = os.getcwd()
-                dir, fn = os.path.split(tex_path)
-                fno, ext = os.path.splitext(fn)
+                fno, ext = os.path.splitext(tex_name)
                 pdfname = fno + '.pdf'
             
-                os.chdir(dir)
                 cmd2 = 'pdf_to_jpeg_one_page.py -r 600 %s' % pdfname
                 os.system(cmd2)
 
                 jpgname = fno + '.jpg'
                 
                 smaller_jpegname = fno + '_smaller.jpg'
-                jpgpath = os.path.join(dir, smaller_jpegname)
+                jpgpath = os.path.join(tex_dir, smaller_jpegname)
 
                 #imagemajick resize
                 cmd = 'convert ' + jpgname + \
@@ -1359,7 +1376,7 @@ class MyApp(wx.App):
                     new_h = int(hi*scale)
                     #Img = Img.Scale(new_w, new_h)#<-- this works but is ugly
                     scaled_jpegname = fno + '_scaled.jpg'
-                    scaled_path = os.path.join(dir, scaled_jpegname)
+                    scaled_path = os.path.join(tex_dir, scaled_jpegname)
                     size_str = '%ix%i' % (new_w, new_h)
                     cmd = 'convert ' + jpgname + ' -filter Cubic -resize ' + size_str + \
                           ' -unsharp 0x0.75+0.75+0.008 ' + scaled_jpegname
@@ -1370,8 +1387,8 @@ class MyApp(wx.App):
                     
                     
                 self.static_bitmap.SetBitmap(wx.BitmapFromImage(Img))
-                os.chdir(curdir)
 
+            os.chdir(curdir)
             self.frame.Refresh()
 
 
